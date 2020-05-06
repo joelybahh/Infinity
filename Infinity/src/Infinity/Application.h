@@ -3,6 +3,9 @@
 #include "Core.h"
 #include "Window.h"
 
+#include "Events/Event.h"
+#include "Infinity/Events/ApplicationEvent.h"
+
 namespace Infinity
 {
 #define ENGINE_VERSION "0.0.1"
@@ -20,6 +23,8 @@ namespace Infinity
 
 		void OnEvent(Event& e);
 	private:
+		bool OnWindowClose(WindowClosedEvent& e);
+
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 	};

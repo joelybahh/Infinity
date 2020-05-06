@@ -1,7 +1,6 @@
 #include "infpch.h"
 #include "Application.h"
 
-#include "Infinity/Events/ApplicationEvent.h"
 #include "Infinity/Log.h"
 
 #include <GLFW/glfw3.h>
@@ -23,7 +22,10 @@ namespace Infinity
 
 	void Application::OnEvent(Event& e)
 	{
-		INF_CORE_INFO("{0}", e);
+		EventDispacher dispacher(e);
+		dispacher.Dispatch<WindowClosedEvent>(BIND_EVENT_FN(OnWindowClose));
+
+		INF_CORE_TRACE("{0}", e);
 	}
 
 	void Application::Run()
@@ -32,5 +34,11 @@ namespace Infinity
 		{
 			m_Window->OnUpdate();
 		}
+	}
+
+	bool Application::OnWindowClose(WindowClosedEvent & e)
+	{
+		m_Running = false;
+		return true;
 	}
 }
