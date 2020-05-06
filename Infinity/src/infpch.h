@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Infinity/Log.h"
+
 #ifdef INF_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

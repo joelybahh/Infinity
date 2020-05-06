@@ -34,6 +34,25 @@ namespace Infinity
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
+	class INFINITY_API WindowFocusEvent : public Event
+	{
+	public:
+		WindowFocusEvent(bool gainedFocus)
+			: m_IsFocused(gainedFocus) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "WindowFocusEvent: " << ((m_IsFocused) ? "Window has focus" : "Window lost focus");
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(WindowFocus)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	private:
+		bool m_IsFocused;
+	};
+
 	class INFINITY_API AppTickEvent : public Event
 	{
 	public:

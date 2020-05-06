@@ -1,5 +1,6 @@
 workspace "Infinity"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -14,7 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Infinity/vendor/GLFW/include"
 
-include "Infinity/vendor/GLFW"
+group "Dependencies"
+	include "Infinity/vendor/GLFW"
+
+group ""
 
 project "Infinity"
 	location "Infinity"
@@ -33,11 +37,17 @@ project "Infinity"
 		"%{prj.name}/src/**.cpp",
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
+	}
+
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"${IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}"
 	}
 
 	links 
@@ -64,14 +74,17 @@ project "Infinity"
 		
 	filter "configurations:Debug"
 		defines "INF_DEBUG"
+		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "INF_RELEASE"
+		runtime "Release"
 		optimize "On"
 		
 	filter "configurations:Dist"
 		defines "INF_DIST"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
