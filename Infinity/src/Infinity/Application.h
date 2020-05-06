@@ -10,6 +10,7 @@ namespace Infinity
 	{
 	public:
 		const char* ApplicationName;
+		const char* ApplicationVersion;
 	public:
 		Application(const char* appName);
 		virtual ~Application();

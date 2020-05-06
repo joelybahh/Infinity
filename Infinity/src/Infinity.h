@@ -2,8 +2,8 @@
 // For use by Infinity Applications
 // --------------------------------
 
-#include <stdio.h>
 #include "Infinity/Application.h"
+#include "Infinity/Log.h"
 
 // ----ENTRY POINT----------------------
 #include "Infinity/EntryPoint.h"

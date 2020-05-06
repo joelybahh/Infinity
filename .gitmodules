@@ -1,0 +1,6 @@
+[submodule "Infinity/vendor/spdlog"]
+	path = Infinity/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Infinity/vendor/GLFW"]
+	path = Infinity/vendor/GLFW
+	url = https://github.com/TheCherno/GLFW

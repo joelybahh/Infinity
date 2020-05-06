@@ -1,4 +1,8 @@
+#include "infpch.h"
 #include "Application.h"
+
+#include "Infinity/Events/ApplicationEvent.h"
+#include "Infinity/Log.h"
 
 namespace Infinity
 {
@@ -12,6 +16,7 @@ namespace Infinity
 
 	void Application::Run()
 	{
+
 		while (true);
 	}
 }
