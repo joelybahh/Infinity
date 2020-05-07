@@ -7,13 +7,16 @@
 
 namespace Infinity
 {
-
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+	
+    Application* Application::s_Instance = nullptr;
 
 	Application::Application(const char* appName) : ApplicationName(appName)
 	{
+		INF_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window->SetEventCallback(INF_BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application()
@@ -32,8 +35,8 @@ namespace Infinity
 
 	void Application::OnEvent(Event& e)
 	{
-		EventDispacher dispacher(e);
-		dispacher.Dispatch<WindowClosedEvent>(BIND_EVENT_FN(OnWindowClose));
+		EventDispatcher dispacher(e);
+		dispacher.Dispatch<WindowClosedEvent>(INF_BIND_EVENT_FN(Application::OnWindowClose));
 
 		// For events, we want to iterate down the stack.
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)

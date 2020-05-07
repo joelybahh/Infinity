@@ -7,8 +7,14 @@
     <Filter Include="Infinity\Events">
       <UniqueIdentifier>{F33EED86-5FCA-5A4B-68DB-DD3FD4E5B64B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Infinity\ImGui">
+      <UniqueIdentifier>{596242A7-4530-36AD-2EC4-A6D31A311212}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
@@ -37,6 +43,9 @@
     <ClInclude Include="src\Infinity\Events\MouseEvent.h">
       <Filter>Infinity\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Infinity\ImGui\ImGuiLayer.h">
+      <Filter>Infinity\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Infinity\Layer.h">
       <Filter>Infinity</Filter>
     </ClInclude>
@@ -49,6 +58,9 @@
     <ClInclude Include="src\Infinity\Window.h">
       <Filter>Infinity</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -58,6 +70,9 @@
     <ClCompile Include="src\Infinity\Application.cpp">
       <Filter>Infinity</Filter>
     </ClCompile>
+    <ClCompile Include="src\Infinity\ImGui\ImGuiLayer.cpp">
+      <Filter>Infinity\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\Infinity\Layer.cpp">
       <Filter>Infinity</Filter>
     </ClCompile>
@@ -66,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="src\Infinity\Log.cpp">
       <Filter>Infinity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>

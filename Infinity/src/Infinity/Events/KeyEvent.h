@@ -58,4 +58,24 @@ namespace Infinity
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	/// <summary>
+	/// An actual event that is used for key pressed events.
+	/// These events contain a repeat count.
+	/// </summary>
+	class INFINITY_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }

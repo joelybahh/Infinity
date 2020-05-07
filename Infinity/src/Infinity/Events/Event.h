@@ -14,7 +14,7 @@ namespace Infinity
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -44,7 +44,7 @@ namespace Infinity
 	/// </summary>
 	class INFINITY_API Event 
 	{
-		friend class EventDispacher;
+		friend class EventDispatcher;
 	public:
 		// Must have methods
 		virtual EventType GetEventType() const = 0;
@@ -65,12 +65,12 @@ namespace Infinity
 
 	// Handles dispatching events at a very high level.
 	// Allows us to pass through just an Event on more specific events such as, KeyEvent for example.
-	class EventDispacher
+	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
 	public:
-		EventDispacher(Event& event)
+		EventDispatcher(Event& event)
 			: m_Event(event)
 		{ }
 

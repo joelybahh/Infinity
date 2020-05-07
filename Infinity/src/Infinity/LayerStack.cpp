@@ -21,12 +21,14 @@ namespace Infinity
 	void LayerStack::PushLayer(Layer * layer)
 	{
 		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+		layer->OnAttach();
 	}
 
 	// Will push an overlay to the end always.
 	void LayerStack::PushOverlay(Layer* overlay)
 	{
 		m_Layers.emplace_back(overlay);
+		overlay->OnAttach();
 	}
 
 	// Pops a layer off the layer stack

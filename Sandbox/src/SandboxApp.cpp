@@ -21,13 +21,15 @@ class Sandbox : public Infinity::Application
 public:
 	Sandbox(const char* appName) : Application(appName) 
 	{ 
-		PushLayer(new ExampleLayer);
+		PushLayer(new ExampleLayer());
+		PushOverlay(new Infinity::ImGuiLayer());
 	}
 	Sandbox(const char* appName, const char* appVersion) : Application(appName) {
 		ApplicationVersion = appVersion;
 		INF_INFO("{0} {1}", ApplicationName, ApplicationVersion);
 
-		PushLayer(new ExampleLayer);
+		PushLayer(new ExampleLayer());
+		PushOverlay(new Infinity::ImGuiLayer());
 	}
 	~Sandbox() { }
 };
