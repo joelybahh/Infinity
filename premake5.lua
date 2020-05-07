@@ -14,9 +14,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Infinity/vendor/GLFW/include"
+IncludeDir["Glad"] = "Infinity/vendor/Glad/include"
 
 group "Dependencies"
 	include "Infinity/vendor/GLFW"
+	include "Infinity/vendor/Glad"
 
 group ""
 
@@ -47,12 +49,14 @@ project "Infinity"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links 
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib" 
 	}
 
@@ -64,7 +68,8 @@ project "Infinity"
 		defines
 		{
 			"INF_PLATFORM_WINDOWS",
-			"INF_BUILD_DLL"
+			"INF_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -74,16 +79,19 @@ project "Infinity"
 		
 	filter "configurations:Debug"
 		defines "INF_DEBUG"
+		buildoptions "/MDd"
 		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "INF_RELEASE"
+		buildoptions "/MD"
 		runtime "Release"
 		optimize "On"
 		
 	filter "configurations:Dist"
 		defines "INF_DIST"
+		buildoptions "/MD"
 		runtime "Release"
 		optimize "On"
 
@@ -124,12 +132,15 @@ project "Sandbox"
 		
 	filter "configurations:Debug"
 		defines "INF_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "INF_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 		
 	filter "configurations:Dist"
 		defines "INF_DIST"
+		buildoptions "/MD"
 		optimize "On"

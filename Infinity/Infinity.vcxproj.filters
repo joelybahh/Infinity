@@ -37,6 +37,12 @@
     <ClInclude Include="src\Infinity\Events\MouseEvent.h">
       <Filter>Infinity\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Infinity\Layer.h">
+      <Filter>Infinity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Infinity\LayerStack.h">
+      <Filter>Infinity</Filter>
+    </ClInclude>
     <ClInclude Include="src\Infinity\Log.h">
       <Filter>Infinity</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Infinity\Application.cpp">
+      <Filter>Infinity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Infinity\Layer.cpp">
+      <Filter>Infinity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Infinity\LayerStack.cpp">
       <Filter>Infinity</Filter>
     </ClCompile>
     <ClCompile Include="src\Infinity\Log.cpp">

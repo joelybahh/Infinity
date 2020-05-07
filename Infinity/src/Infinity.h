@@ -3,6 +3,7 @@
 // --------------------------------
 
 #include "Infinity/Application.h"
+#include "Infinity/Layer.h"
 #include "Infinity/Log.h"
 
 // ----ENTRY POINT----------------------
