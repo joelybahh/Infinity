@@ -7,6 +7,11 @@
 #include "Infinity/Events/Event.h"
 #include "Infinity/Events/ApplicationEvent.h"
 
+#include "Infinity/ImGui/ImGuiLayer.h"
+
+#include "Infinity/Renderer/Shader.h"
+#include "Infinity/Renderer/Buffer.h"
+
 namespace Infinity
 {
 #define ENGINE_VERSION "0.0.1"
@@ -33,9 +38,15 @@ namespace Infinity
 		bool OnWindowClose(WindowClosedEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
+
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+		UINT m_VertexArray;
+		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer>  m_IndexBuffer;
 	private:
 		static Application* s_Instance;
 	};

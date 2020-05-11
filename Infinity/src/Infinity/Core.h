@@ -1,10 +1,15 @@
 #pragma once
 
 #ifdef INF_PLATFORM_WINDOWS
-	#ifdef INF_BUILD_DLL
-		#define INFINITY_API __declspec(dllexport)
-	#else // INF_BUILD_DLL
-		#define INFINITY_API __declspec(dllimport)
+	#if INF_DYNAMIC_LINK
+		#ifdef INF_BUILD_DLL
+			#define INFINITY_API __declspec(dllexport)
+		#else // INF_BUILD_DLL
+			#define INFINITY_API __declspec(dllimport)
+		#endif
+	#else
+		// Statically Linked DLL will define this as nothing.
+		#define INFINITY_API
 	#endif
 #else
 	#error Infinity currently only supports windows

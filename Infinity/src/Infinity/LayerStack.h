@@ -27,10 +27,6 @@ namespace Infinity
 		std::vector<Layer*>::iterator end()   { return m_Layers.end(); }
 	private:
 		std::vector<Layer*> m_Layers;
-
-		// Tracks the position of layer inserting, which is only at the end of layers and not overlays.
-		// So adding an overlay won't affect this iterator, so therefore the next time you add a layer,
-		// regardless of how many overlays you've added, it will never be infront of any overlays.
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 	};
 }

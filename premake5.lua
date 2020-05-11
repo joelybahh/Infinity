@@ -16,18 +16,18 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Infinity/vendor/GLFW/include"
 IncludeDir["Glad"] = "Infinity/vendor/Glad/include"
 IncludeDir["ImGui"] = "Infinity/vendor/imgui"
+IncludeDir["glm"] = "Infinity/vendor/glm"
 
-group "Dependencies"
-	include "Infinity/vendor/GLFW"
-	include "Infinity/vendor/Glad"
-	include "Infinity/vendor/imgui"
-
-group ""
+include "Infinity/vendor/GLFW"
+include "Infinity/vendor/Glad"
+include "Infinity/vendor/imgui"
 
 project "Infinity"
 	location "Infinity"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -39,12 +39,13 @@ project "Infinity"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
-
-	defines
+	
+	defines 
 	{
-		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -53,7 +54,8 @@ project "Infinity"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -65,8 +67,6 @@ project "Infinity"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -75,34 +75,28 @@ project "Infinity"
 			"INF_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
 		
 	filter "configurations:Debug"
 		defines "INF_DEBUG"
-		buildoptions "/MDd"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "INF_RELEASE"
-		buildoptions "/MD"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
 	filter "configurations:Dist"
 		defines "INF_DIST"
-		buildoptions "/MD"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -116,7 +110,9 @@ project "Sandbox"
 	includedirs
 	{
 		"Infinity/vendor/spdlog/include",
-		"Infinity/src";
+		"Infinity/src",
+		"Infinity/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -125,8 +121,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -136,15 +130,15 @@ project "Sandbox"
 		
 	filter "configurations:Debug"
 		defines "INF_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "INF_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 		
 	filter "configurations:Dist"
 		defines "INF_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"

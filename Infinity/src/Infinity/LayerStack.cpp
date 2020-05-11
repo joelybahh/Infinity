@@ -3,11 +3,7 @@
 
 namespace Infinity
 {
-	LayerStack::LayerStack() 
-	{ 
-		// When we construct a stack, we want the iterator to be at the beginning of the vector.
-		m_LayerInsert = m_Layers.begin();
-	}
+	LayerStack::LayerStack() { }
 	LayerStack::~LayerStack() 
 	{ 
 		/* TODO: Layers in the stack will only currently be deleted if they remain in the stack for the lifecycle of the application.
@@ -19,16 +15,15 @@ namespace Infinity
 
 	// Will push the layer as the last layer, but never infront of an overlay.
 	void LayerStack::PushLayer(Layer * layer)
-	{
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
-		layer->OnAttach();
+	{	
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_LayerInsertIndex++;
 	}
 
 	// Will push an overlay to the end always.
 	void LayerStack::PushOverlay(Layer* overlay)
 	{
 		m_Layers.emplace_back(overlay);
-		overlay->OnAttach();
 	}
 
 	// Pops a layer off the layer stack
@@ -38,7 +33,7 @@ namespace Infinity
 		if (it != m_Layers.end())
 		{
 			m_Layers.erase(it);
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 

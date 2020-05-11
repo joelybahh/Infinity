@@ -22,6 +22,8 @@ namespace Infinity
 		// Gets called by the application when the layer is updated. (Every Frame)
 		virtual void OnUpdate() {}
 
+		virtual void OnImGuiRender() {}
+
 		// Whenever an event gets send to the layer.
 		virtual void OnEvent(Event& event) {}
 
